@@ -241,7 +241,12 @@
             <p>
                 Ingrese el o los festivos del período a evaluar. Ejemplo (01/08/2022 25/12/2022) <br>
                 Este parámetro es opcional, pero haría más realista el cálculo para el calendario colombiano. <br>
-                <input type="text" name="festivos" value="<?php echo $cadena_festivos ?>" placeholder = "Use números, espacio y /" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 || event.charCode == 47 || event.charCode == 32)" size="50">
+                
+                <?php
+                    include( "solo-festivos.php" );
+                ?>
+
+                <input type="text" name="festivos" value="<?php echo $cadena_festivos; ?>" placeholder = "Use números, espacio y /" onkeypress="return (event.charCode >= 48 && event.charCode <= 57 || event.charCode == 47 || event.charCode == 32)" size="50">
             </p>
 
             <p>
@@ -254,7 +259,7 @@
                 ?>
                 
                 Rap<?= $i ?><input type="text" name="dato<?= $i ?>" value="<?php echo isset( $actividades[ $i ] )? $actividades[ $i ]: ''; ?>" <?php echo $i == 1 ? 'required': ''; ?> placeholder="Actividad o su código" >
-                Horas: <input type="number" name="horas<?= $i ?>" value="<?php echo isset( $horas_totales_actividad[ $i ] )? $horas_totales_actividad[ $i ]: 0; ?>" <?php echo $i == 1 ? 'required': ''; ?> >
+                Horas: <input type="number" name="horas<?= $i ?>" value="<?php echo isset( $horas_totales_actividad[ $i ] )? $horas_totales_actividad[ $i ]: 0; ?>" <?php echo $i == 1 ? 'required': ''; ?> min="0" max="50000">
                 <br>
                 
                 <?php
@@ -263,7 +268,7 @@
             </p>
             
             <p>
-                Horas diarias.<input type="number" name="horas-diarias" value="<?php echo isset( $horas_por_dia[ 1 ] )? $horas_por_dia[ 1 ]: 6.5; ?>" step="0.5">
+                Horas diarias.<input type="number" name="horas-diarias" value="<?php echo isset( $horas_por_dia[ 1 ] )? $horas_por_dia[ 1 ]: 6.5; ?>" step="0.5" min="0.5" max="24">
                 <br>
                 <input type="checkbox" id="cbox0" name="cbox0" value="0" <?php echo $dia_laboral[ 0 ] == 1 ? 'checked': ''; ?> > <label for="cbox0">D</label>
                 <input type="checkbox" id="cbox1" name="cbox1" value="1" <?php echo $dia_laboral[ 1 ] == 1 ? 'checked': ''; ?> > <label for="cbox1">L</label>
